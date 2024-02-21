@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
       );
 
       // Check if any insertions failed
-      const hasError = processedDataArray.some((result) => !result.success);
+      const hasError = processedDataArray.some((result) => !result.ok);
 
       if (hasError) {
         return NextResponse.json({
