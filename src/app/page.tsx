@@ -8,9 +8,6 @@ import Nav from "@/components/Nav/index";
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  // const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  // const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY;
-  // const supabase = createClient(supabaseUrl, supabaseKey);
 
   const CelebrityProfileCard = ({ profile }: { profile: any }) => (
     <div className="max-w-sm rounded overflow-hidden shadow-md m-4 h-1/2">
@@ -49,7 +46,6 @@ export default function Home() {
     if (error) {
       console.log(error);
     } else {
-      console.log("data11", data);
       setSearchResults(data as never[]);
     }
   };
@@ -116,16 +112,16 @@ export default function Home() {
         </button>
       </form>
       <div className="flex flex-wrap justify-center overflow-y-auto">
-        {searchResults.map((profile, index) => (
+        {searchResults && searchResults.map((profile, index) => (
           <CelebrityProfileCard key={index} profile={profile} />
         ))}
       </div>
-      {/* <button
+      <button
         className="px-4 py-2 bg-green-500 text-white rounded-r-lg"
         onClick={postToSetup}
       >
         Setup
-      </button> */}
+      </button>
     </div>
   );
 }

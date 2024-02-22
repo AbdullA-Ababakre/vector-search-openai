@@ -22,14 +22,12 @@ export async function POST(request: Request) {
     input: query,
   });
 
-  const [{ embedding }] = openAiEmbeddings.data;
-
-  console.log("embedding11", embedding);
+  const embedding = openAiEmbeddings.data[0].embedding;
 
   // Search Supabase
   const { data, error } = await supabaseClient.rpc("vector_search", {
     query_embedding: embedding,
-    similarity_threshold: 0.8,
+    similarity_threshold: 0.2,
     match_count: 5,
   });
 

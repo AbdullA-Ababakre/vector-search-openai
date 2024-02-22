@@ -16,7 +16,6 @@ export async function POST(req: NextRequest) {
 
   // Function to generate OpenAI embeddings for a given text
   async function generateOpenAIEmbeddings(profile: any) {
-    // console.log("textToEmbed111", textToEmbed);
     const response = await openai.embeddings.create({
       model: "text-embedding-3-large",
       input: profile,
@@ -29,11 +28,8 @@ export async function POST(req: NextRequest) {
     if (builders) {
       const processedDataArray = await Promise.all(
         builders.map(async (item: any) => {
-          const embeddings = await generateOpenAIEmbeddings(item.summary);
-          // const modifiedItem = { ...item, embeddings };
-          // const { data, error } = await supabaseClient
-          //   .from("builders")
-          //   .upsert({ id: item.id });
+          const info = `I am ${item.name},My twitter bio is ${item.bio},I was the Buildspace ${item.types} seasons student and this is my summary %{item.summary}`;
+          const embeddings = await generateOpenAIEmbeddings(info);
 
           const { data, error } = await supabaseClient
             .from("builders")
